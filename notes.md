@@ -8,8 +8,7 @@ _Imagine_: freedom from the horrors of out-of-bounds access, use-after-free,
 data races – without sacrificing speed!
 
 Not only does Rust guarantee memory safety, but it brings with it the joy of 
-namespaces, trait-based generics, pattern matching and gasp sensible build 
-systems.
+namespaces, trait-based generics, pattern matching and sensible build systems.
 <!--
 Ideas for talk:
 * Introduction: why C and C++ are so popular, where Rust fits in and why it is 
@@ -109,3 +108,5 @@ find unused objects, releasing their associated resources and memory.
 Garbage collection basically eliminates double frees, dangling pointers, and 
 some memory leaks.  Important achievements!  But GC does this at an overhead, 
 at the expense of resources and performance.
+
+
