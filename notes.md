@@ -1,5 +1,15 @@
 # Let's get rusty!
 ## Fast and safe systems programming with Rust
+
+_Rust_ – what is it? Rust is a systems programming language as fast as C and 
+C++, but without the horrible capacity for memory danger.
+
+_Imagine_: freedom from the horrors of out-of-bounds access, use-after-free, 
+data races – without sacrificing speed!
+
+Not only does Rust guarantee memory safety, but it brings with it the joy of 
+namespaces, trait-based generics, pattern matching and gasp sensible build 
+systems.
 <!--
 Ideas for talk:
 * Introduction: why C and C++ are so popular, where Rust fits in and why it is 
