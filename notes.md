@@ -38,8 +38,8 @@ possible for the language (the worker) to report it, but what does C/C++ do?
 > * It finds some non-intuitive interpretation of `"house"[-1]` (one which may 
 >   vary 
 each time the program runs!, and which can't be predicted by the programmer),
-* then it grabs a series of bits from some place dictated by the wacky 
-  interpretation,
+then it grabs a series of bits from some place dictated by the wacky 
+interpretation,
 * it blithely assumes that these bits are meant to be a number (not even a 
 character),
 * it multiplies that practically-random number by 37, and
