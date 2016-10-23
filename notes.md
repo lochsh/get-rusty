@@ -95,3 +95,17 @@ Rust isn't simply a memory safe version of C++.  Rust is its own language with
 its own design goals and many features borrowed from functional programming.
 
 To understand Rust and its design, let's move onto Rust's core principles.
+
+
+### Memory safety without garbage collection
+
+Briefly, let's discuss what garbage collection is and why it is slow.  Managing 
+resources in a program is about freeing up memory being used by unreachable 
+objects.  For example, a variable that has gone out of scope is unreachable.  
+
+Garbage collection achieves this management by periodically checking memory to 
+find unused objects, releasing their associated resources and memory.
+
+Garbage collection basically eliminates double frees, dangling pointers, and 
+some memory leaks.  Important achievements!  But GC does this at an overhead, 
+at the expense of resources and performance.
