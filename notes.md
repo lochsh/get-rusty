@@ -27,6 +27,7 @@ Ideas for talk:
     * "blisteringly fast"
     * type inference-->
 
+
 ### For motivation, I present this excerpt from Ian Barland's ["Why C and C++ are Awful Programming Languages"](http://www.radford.edu/ibarland/Manifestoes/whyC++isBad.shtml)
 
 > Imagine you are a construction worker, and your boss tells you to connect the 
@@ -70,6 +71,7 @@ vulnerabilities made possible by these languages.
 undefined behaviour for integer overflow.  [Heartbleed](http://heartbleed.com/) 
 was due to C's absence of bounded arrays.
 
+
 ### So, why are C and C++ so popular?
 
 I think C and C++ are popular for a variety of reasons.  I want to focus on the 
@@ -80,3 +82,16 @@ collection to ensure memory safety, but at the cost of control and speed.  C
 and C++ run fast and offer control, but at the expense of safety guarantees.
 
 With Rust, we no longer have to choose between safety and control.
+
+
+### What is Rust?
+
+Rust is an exciting new language (its first stable release was in 2015, last 
+year!) designed to be safe, concurrent and practical.  It is useful for the 
+same kind of applications as C and C++ due to its speed and high level of 
+control.
+
+Rust isn't simply a memory safe version of C++.  Rust is its own language with 
+its own design goals and many features borrowed from functional programming.
+
+To understand Rust and its design, let's move onto Rust's core principles.
