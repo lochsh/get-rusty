@@ -45,19 +45,27 @@ character),
 * it multiplies that practically-random number by 37, and
 then reports the result, all without any hint of a problem.
 
+> In a world where programs control credit-card databases, car brakes, my 
+personal finances, airplanes, and x-ray machines, it is criminal negligence to 
+use a language with the flaws of C/C++. Even for games, browsers, and 
+spreadsheets, the use of C/C++ needlessly helps inflict buggy software on the 
+everyday user.
 
+The writing here is provocative, but for good reason.  C has some very real 
+issues: undefined behaviour, weakly enforced typing, notorious lack of memory 
+safety.  C++ provides a lot of different features, but is still unsafe, 
+inheriting many of C's problems.  Many famous exploits are due to 
+vulnerabilities made possible by these languages.  Stagefright is due to C++'s 
+undefined behaviour for integer overflow.  Heartbleed was due to C's absence of 
+bounded arrays.
 
-<!--
-        * Why do people use them?  For a variety of reasons, but in large part 
-          because they give runtime efficiency, and control.
+### So, why are C and C++ so popular?
 
-        * For a long time, it has seemed we have to choose between this control 
-          and safety.  Languages like Java use garbage collection to ensure 
-          memory safety, but this is slow.  Java takes away a lot of the 
-          control C and C++ give.
+I think C and C++ are popular for a variety of reasons.  I want to focus on the 
+high level of control they provide, and their runtime efficiency, which are 
+strong motivators for many.  For a long time, it has seemed like we have to 
+make a choice between control and safety.  Languages like Java use garbage 
+collection to ensure memory safety, but at the cost of control and speed.  C 
+and C++ run fast and offer contorl, but at the expense of safety guarantees.
 
-        * With Rust, we no longer have to choose between safety and control.
-
-    * What is Rust?  Is it just like C but safe?
-
--->
+With Rust, we no longer have to choose between safety and control.
