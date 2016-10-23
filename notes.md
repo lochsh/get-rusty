@@ -55,9 +55,10 @@ The writing here is provocative, but for good reason.  C has some very real
 issues: undefined behaviour, weakly enforced typing, notorious lack of memory 
 safety.  C++ provides a lot of different features, but is still unsafe, 
 inheriting many of C's problems.  Many famous exploits are due to 
-vulnerabilities made possible by these languages.  Stagefright is due to C++'s 
-undefined behaviour for integer overflow.  Heartbleed was due to C's absence of 
-bounded arrays.
+vulnerabilities made possible by these languages.  
+[Stagefright](https://en.wikipedia.org/wiki/Stagefright_(bug)) is due to C++'s 
+undefined behaviour for integer overflow.  [Heartbleed](http://heartbleed.com/) 
+was due to C's absence of bounded arrays.
 
 ### So, why are C and C++ so popular?
 
@@ -66,6 +67,6 @@ high level of control they provide, and their runtime efficiency, which are
 strong motivators for many.  For a long time, it has seemed like we have to 
 make a choice between control and safety.  Languages like Java use garbage 
 collection to ensure memory safety, but at the cost of control and speed.  C 
-and C++ run fast and offer contorl, but at the expense of safety guarantees.
+and C++ run fast and offer control, but at the expense of safety guarantees.
 
 With Rust, we no longer have to choose between safety and control.
