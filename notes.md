@@ -112,7 +112,14 @@ So, how does Rust achieve memory safety without this overhead?
 
 #### Ownership
 
-Rust achieves memory safety through the concept of ownership.  From the Rust 
-docs: Variable bindings have a property in Rust: they ‘have ownership’ of what 
-they’re bound to. This means that when a binding goes out of scope, Rust will 
-free the bound resources.
+Rust achieves memory safety through the concept of ownership.  This is an 
+exciting feature, a vital part of Rust that allows it to be both
+memory-safe _and_ efficient.  All objects have an owner at all times, which is 
+tracked by the compiler.  The owner can give out references to other users, 
+with some restrictions, or it can transfer the ownership of the variable.  This 
+way, Rust ensures that there is _exactly one_ binding to any given resource. We 
+can't ever have a situation where two owners try to change the data 
+simultaneously, and we can't refer to a value that some other owner destroyed. 
+This gives us memory safety.  Rust's key innovation is enforcing these checks 
+at compile time, meaning they do not present any run-time cost.  We get memory 
+safety, without overhead.
