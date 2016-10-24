@@ -90,7 +90,7 @@ same kind of applications as C and C++ due to its speed and high level of
 control.
 
 Rust isn't simply a memory safe version of C++.  Rust is its own language with 
-its own design goals and many features borrowed from functional programming.
+its own design goals, and many features borrowed from functional programming.
 
 To understand Rust and its design, let's move onto Rust's core principles.
 
@@ -108,4 +108,11 @@ Garbage collection basically eliminates double frees, dangling pointers, and
 some memory leaks.  Important achievements!  But GC does this at an overhead, 
 at the expense of resources and performance.
 
+So, how does Rust achieve memory safety without this overhead?
 
+#### Ownership
+
+Rust achieves memory safety through the concept of ownership.  From the Rust 
+docs: Variable bindings have a property in Rust: they ‘have ownership’ of what 
+they’re bound to. This means that when a binding goes out of scope, Rust will 
+free the bound resources.
