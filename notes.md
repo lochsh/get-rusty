@@ -65,9 +65,9 @@ The writing here is provocative, but for good reason.  C has some very real
 issues: undefined behaviour, weakly enforced typing, notorious lack of memory 
 safety.  C++ provides a lot of new features, but is still unsafe, and inherits 
 many of C's problems.  Many famous exploits are due to vulnerabilities made 
-possible by these languages.  [Stagefright](https://en.wikipedia.org/wiki/Stagefright_(bug)) is due to C++'s 
-undefined behaviour for signed integer overflow; 
-[Heartbleed](http://heartbleed.com/) was due to C's absence of bounded arrays.
+possible by these languages.  [Stagefright](https://en.wikipedia.org/wiki/Stagefright_(bug)) is due to 
+integer overflow in C++; [Heartbleed](http://heartbleed.com/) was due to C's 
+absence of bounded arrays.
 
 
 ### So, why are C and C++ so popular?
