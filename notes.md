@@ -131,26 +131,26 @@ let mut v2 = v;
 v2.truncate(2);
 ```
 The first line allocates memory for the vector object `v` on the stack, and 
-allocates memory on the heap for the data, `[1, 2, 3]`.  Rust copies the 
+allocates memory on the heap for the data, `[1, 2, 3]`. Rust copies the 
 address of this heap allocation to an internal pointer, which is part of the 
 vector object.
 
 We have a vector object in one place (the stack), and its data in another (the 
-heap).  The two parts must agree at all times, e.g. with regards to length.
+heap). The two parts must agree at all times, e.g. with regards to length.
 
-Now let's consider the second line of code.  Here, we move `v` to `v2`.  A 
+Now let's consider the second line of code. Here, we move `v` to `v2`. A 
 shallow copy is performed: Rust does a bitwise copy of the vector object `v` 
-into the stack allocation represented by `v2`.  This shallow copy does _not_ 
+into the stack allocation represented by `v2`. This shallow copy does _not_ 
 create a copy of the heap allocation containing the vector's actual data.
 
 If both `v` and `v2` both point to the same data, what happens if we change 
 that data, as we do in the third line?  The vector object `v` would have out of 
-date information about its data, and become invalid.  We would have introduced
+date information about its data, and become invalid. We would have introduced
 a data race.
 
 To prevent this occurring, Rust enforces its rule of each value having _exactly 
-one_ binding at any given time.  Once we move the vector to `v2`, `v` is no 
-longer accessible.  Trying to use it will result in a compiler error:
+one_ binding at any given time. Once we move the vector to `v2`, `v` is no 
+longer accessible. Trying to use it will result in a compiler error:
 
 ```rust
 let v = vec![1, 2, 3];
@@ -197,9 +197,92 @@ any other operations.
 
 #### Memory safety at zero run-time cost
 As we have seen, Rust's ownership and borrowing model completely prevents data 
-races.  This, along with compile-time checks for array bounds &c., ensures 
-complete memory safety.  That means freedom from buffer overflow, dangling 
+races. This, along with compile-time checks for array bounds &c., ensures 
+complete memory safety. That means freedom from buffer overflow, dangling 
 pointers and use-after-free. Rust's key innovation is enforcing these checks at 
 _compile time_, meaning they do not present any run-time cost. We get memory 
-safety, without overhead.  This completely overturns the old trade-off between 
+safety, without overhead. This completely overturns the old trade-off between 
 safety and speed/control.
+
+We have now covered Rust's first core principle; what about the others?
+
+
+### Concurrency without data races
+Concurrency has always presented a lot of challenges to programmers, sometimes 
+with devastating consequences.  Most of us will know of the famous Therac-25 
+disaster, where concurrent programming errors (most notably a data race) 
+resulted in radiotherapy patients being given radiation poisoning, and several 
+consequent deaths.
+
+We have already seen how Rust makes data races impossible, already paving the 
+way for fearless concurrency.  Concurrent programming in Rust is not something 
+I have much experience in, but I think it's promising that reliable concurrency 
+is a core design principle of Rust.
+
+
+### Abstraction without overhead
+
+Abstraction without overhead is a design principle shared with C++.  As C++'s 
+[originator](http://www.stroustrup.com/) put it:
+
+> What you don’t use, you don’t pay for. And further: What 
+you do use, you couldn’t hand code any better.
+
+In Rust, _traits_ are a large part of how it achieves this.   ["The trait 
+system gives Rust the ergonomic, expressive feel of high-level languages while 
+retaining low-level control over code execution and data 
+representation."](https://blog.rust-lang.org/2015/05/11/traits.html)
+
+#### So, what is a trait?
+
+Traits are interfaces: they specify the expectations that one piece of code has 
+on another, allowing each to be switched out independently.  Hooray for 
+modularity and flexibility!  Traits specify this interface through _methods_:
+
+```rust
+trait Hash {
+    fn hash(&self) -> u64;
+}
+
+
+impl Hash for bool {
+    fn hash(&self) -> u64 {
+        if *self {0} else {1}
+    }
+}
+
+impl Hash for i64 {
+    fn hash(&self) -> u64 {
+        *self as u64
+    }
+}
+```
+Here, we define a trait called `Hash`, and say that any type implementing this 
+trait _must_ have the method `hash`.  Later, we implement this trait for the 
+types `bool` and `i64`, by defining this method for this particular type.
+
+Traits allow for _generic programming_:
+
+```rust
+fn print_hash<T: Hash>(t: &T) {
+    println!("The hash is {}", t.hash())
+}
+```
+This function `print_hash` is generic over type `T`.  It can take any type that 
+implements the `Hash` trait!  As with C++ templates, the compiler will now 
+generate a copy of `print_hash` for every type implementing the `Hash` trait. 
+When we actually call `t.hash()`, at runtime, there is no cost.  Abstraction, 
+without overhead!
+
+One of the notable differences between this and C++ templates, is that clients 
+of traits are fully type-checked in advance, _once_.  In C++, the code is 
+checked repeatedly when applied to concrete types.  Rust's way means clearer 
+and earlier compilation errors, something template meta-programming in C++ is 
+notorious for its shortcomings in.
+
+### The Rust community and tools
+
+I hope I've now given you a good feel for what Rust is like as a language. I 
+think the community and the development tools they have created is also 
+something worth shouting about, and something that gives me hope that Rust will 
+continue to grow both as a language and in popularity.
