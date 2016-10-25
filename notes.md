@@ -112,9 +112,9 @@ So, how does Rust achieve memory safety without this overhead?
 
 #### Ownership
 
-Rust achieves memory safety through the concept of ownership. This is an 
-exciting feature, a vital part of Rust that allows it to be both
-memory-safe _and_ efficient. All objects have an owner at all times, which is 
+A large part of how Rust achieves memory safety is through the concept of 
+ownership. This is an exciting feature, a vital part of Rust that allows it to 
+be both memory-safe _and_ efficient. All objects have an owner at all times, which is 
 tracked by the compiler. The owner can give out references to other users, with 
 some restrictions, or it can transfer the ownership of the variable. Crucially, 
 there can only be one owner. The Rust compiler ensures that there is _exactly 
@@ -122,22 +122,55 @@ one_ binding to any given value at a time.
 
 
 #### Ownership in practice
+Consider this short code snippet from the [Rust 
+docs](https://doc.rust-lang.org/stable/book/ownership.html#the-details)
 
 ```rust
-fn foo() {
-    let x = String::from("Hello");
-    let y = x;
-    println!("{}", x);  // error[E0382]: use of moved value: `x`
-}
+let v = vec![1, 2, 3];
+let mut v2 = v;
+v2.truncate(2);
+```
+The first line allocates memory for the vector object `v` on the stack, and 
+allocates memory on the heap for the data, `[1, 2, 3]`.  Rust copies the 
+address of this heap allocation to an internal pointer, which is part of the 
+vector object.
+
+We have a vector object in one place (the stack), and its data in another (the 
+heap).  The two parts must agree at all times, e.g. with regards to length.
+
+Now let's consider the second line of code.  Here, we move `v` to `v2`.  A 
+shallow copy is performed: Rust does a bitwise copy of the vector object `v` 
+into the stack allocation represented by `v2`.  This shallow copy does _not_ 
+create a copy of the heap allocation containing the vector's actual data.
+
+If both `v` and `v2` both point to the same data, what happens if we change 
+that data, as we do in the third line?  The vector object `v` would have out of 
+date information about its data, and become invalid.  We would have introduced
+a data race.
+
+To prevent this occurring, Rust enforces its rule of each value having _exactly 
+one_ binding at any given time.  Once we move the vector to `v2`, `v` is no 
+longer accessible.  Trying to use it will result in a compiler error:
+
+```rust
+let v = vec![1, 2, 3];
+let mut v2 = v;
+println!("{:?}", v);
 ```
 
-This program doesn't compile. Why?  We have created a binding `x` to a string. 
-When we create the binding `y`, we transfer ownership of that string to `y`. 
-The name `x` is no longer bound, and trying to use it will cause the compiler 
-to raise an error.
+```
+error[E0382]: use of moved value: `v`
+ --> <anon>:4:22
+   |
+   |2 |     let mut v2 = v;
+   |  |         ------ value moved here
+   |  3 |     println!("{:?}", v);
+   |    |                      ^ value used here after move
+```
 
-Note that for primitive types, like integers, this _would_ compile, as a deep 
-copy is performed for convenience.
+Preventing memory problems like the one described above is important: at best, 
+we can get a segmentation fault; at worst, we could allow an unauthorised user 
+to read memory they shouldn't have access to.
 
 
 #### Borrowing
