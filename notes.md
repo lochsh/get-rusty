@@ -2,30 +2,13 @@
 ## Fast and safe systems programming with Rust
 
 _Rust_ – what is it? Rust is a systems programming language as fast as C and 
-C++, but without the horrible capacity for memory danger.
+C++, but without the horrible capacity for shooting yourself in the foot.
 
 _Imagine_: freedom from the horrors of out-of-bounds access, use-after-free, 
 data races – without sacrificing speed!
 
 Not only does Rust guarantee memory safety, but it brings with it the joy of 
 namespaces, trait-based generics, pattern matching and sensible build systems.
-<!--
-Ideas for talk:
-* Introduction: why C and C++ are so popular, where Rust fits in and why it is 
-  exciting.
-* Three pillars of design
-    * Abstraction without overhead
-    * Memory safety without garbage collection
-    * Concurrency without data races
-* Features
-    * trait-based generics
-    * pattern matching
-    * sensible build systems!
-    * namespaces
-    * modules
-    * "blisteringly fast"
-    * type inference-->
-
 
 ### For motivation, I present this excerpt from Ian Barland's ["Why C and C++ are Awful Programming Languages"](http://www.radford.edu/ibarland/Manifestoes/whyC++isBad.shtml)
 
@@ -84,10 +67,10 @@ With Rust, we no longer have to choose between safety and control.
 
 ### What is Rust?
 
-Rust is an exciting new language (its first stable release was in 2015, last 
-year!) designed to be safe, concurrent and practical. It is useful for the 
-same kind of applications as C and C++ due to its speed and high level of 
-control.
+Rust is an exciting new language, started in 2010 and sponsored by Mozilla, its 
+first stable release was in 2015, last year! It's designed to be safe, 
+concurrent and practical. It is useful for the same kind of applications as C 
+and C++ due to its speed and high level of control.
 
 Rust isn't simply a memory safe version of C++. Rust is its own language with 
 its own design goals, and many features borrowed from functional programming.
@@ -105,8 +88,8 @@ Garbage collection achieves this management by periodically checking memory to
 find unused objects, releasing their associated resources and memory.
 
 Garbage collection basically eliminates double frees, dangling pointers, and 
-some memory leaks. Important achievements!  But GC does this at an overhead, 
-at the expense of resources and performance.
+some memory leaks. Important achievements!  But GC does this at an overhead, at 
+the expense of resources, performance and predictability.
 
 So, how does Rust achieve memory safety without this overhead?
 
@@ -209,26 +192,26 @@ We have now covered Rust's first core principle; what about the others?
 
 ### Concurrency without data races
 Concurrency has always presented a lot of challenges to programmers, sometimes 
-with devastating consequences.  Most of us will know of the famous Therac-25 
+with devastating consequences. Most of us will know of the famous Therac-25 
 disaster, where concurrent programming errors (most notably a data race) 
 resulted in radiotherapy patients being given radiation poisoning, and several 
 consequent deaths.
 
 We have already seen how Rust makes data races impossible, already paving the 
-way for fearless concurrency.  Concurrent programming in Rust is not something 
+way for fearless concurrency. Concurrent programming in Rust is not something 
 I have much experience in, but I think it's promising that reliable concurrency 
 is a core design principle of Rust.
 
 
 ### Abstraction without overhead
 
-Abstraction without overhead is a design principle shared with C++.  As C++'s 
+Abstraction without overhead is a design principle shared with C++. As C++'s 
 [originator](http://www.stroustrup.com/) put it:
 
 > What you don’t use, you don’t pay for. And further: What 
 you do use, you couldn’t hand code any better.
 
-_Traits_ are a large part of how Rust achieves this.   ["The trait system gives 
+_Traits_ are a large part of how Rust achieves this.  ["The trait system gives 
 Rust the ergonomic, expressive feel of high-level languages while retaining 
 low-level control over code execution and data 
 representation."](https://blog.rust-lang.org/2015/05/11/traits.html)
@@ -236,7 +219,7 @@ representation."](https://blog.rust-lang.org/2015/05/11/traits.html)
 #### So, what is a trait?
 
 Traits are interfaces: they specify the expectations that one piece of code has 
-on another, allowing each to be switched out independently.  Hooray for 
+on another, allowing each to be switched out independently. Hooray for 
 modularity and flexibility!  Traits specify this interface through _methods_:
 
 ```rust
@@ -258,7 +241,7 @@ impl Hash for i64 {
 }
 ```
 Here, we define a trait called `Hash`, and say that any type implementing this 
-trait _must_ have the method `hash`.  Later, we implement this trait for the 
+trait _must_ have the method `hash`. Later, we implement this trait for the 
 types `bool` and `i64`, by defining this method for this particular type.
 
 Traits allow for _generic programming_:
@@ -268,15 +251,15 @@ fn print_hash<T: Hash>(t: &T) {
     println!("The hash is {}", t.hash())
 }
 ```
-This function `print_hash` is generic over type `T`.  It can take any type that 
+This function `print_hash` is generic over type `T`. It can take any type that 
 implements the `Hash` trait!  As with C++ templates, the compiler will now 
 generate a copy of `print_hash` for every type implementing the `Hash` trait. 
-When we actually call `t.hash()`, at runtime, there is no cost.  Abstraction, 
+When we actually call `t.hash()`, at runtime, there is no cost. Abstraction, 
 without overhead!
 
 One of the notable differences between this and C++ templates, is that clients 
-of traits are fully type-checked in advance, _once_.  In C++, the code is 
-checked repeatedly when applied to concrete types.  Rust's way means clearer 
+of traits are fully type-checked in advance, _once_. In C++, the code is 
+checked repeatedly when applied to concrete types. Rust's way means clearer 
 and earlier compilation errors, something template meta-programming in C++ is 
 notorious for its shortcomings in.
 
@@ -293,30 +276,30 @@ issues in Rust's core are tagged to allow new people to come in and learn with
 the help of someone more experienced.
 
 One of the hardest things for many people learning Rust is its tough learning 
-curve.  The ownership model is new for a lot of people, and manual lifetime 
+curve. The ownership model is new for a lot of people, and manual lifetime 
 annotation (something I didn't get onto in this talk) is still something I'm 
-struggling with (I just do what the compiler tells me!).  Rust has amazing 
+struggling with (I just do what the compiler tells me!). Rust has amazing 
 documentation, and incredibly helpful compilation error messages. The community 
-is working hard to make these even better.  The [Rust Roadmap for 
+is working hard to make these even better. The [Rust Roadmap for 
 2017](https://github.com/aturon/rfcs/blob/roadmap-2017/text/0000-roadmap-2017.md) 
 states that making learning easier is one of their main goals.
 
 
 #### Cargo
 
-Cargo, Rust's package management tool, is wonderful.  In one simple file, I 
-list the dependencies of my project.  Then I run `$ cargo build`, and the 
-project is built.  `$ cargo run` will run the project's main.  `$ cargo test` 
-will run the tests.  It's that simple!  No faffing around with Makefiles!
+Cargo, Rust's package management tool, is wonderful. In one simple file, I 
+list the dependencies of my project. Then I run `$ cargo build`, and the 
+project is built. `$ cargo run` will run the project's main. `$ cargo test` 
+will run the tests. It's that simple!  No faffing around with Makefiles!
 
-Importantly, Cargo is the one tool used for this.  C and C++ suffer from having 
-a wide range of tools for this one task.  It's so much easier and cleaner to 
+Importantly, Cargo is the one tool used for this. C and C++ suffer from having 
+a wide range of tools for this one task. It's so much easier and cleaner to 
 just have one that works brilliantly, and also makes it simpler for newcomers 
 to figure out how to get set up.
 
 
 ### Closing thoughts
 
-I'm really excited about Rust.  Writing it is a joy.  The guaranteed memory 
-safety is amazing.  I can't wait to see what's in Rust's future, and I hope you 
+I'm really excited about Rust. Writing it is a joy. The guaranteed memory 
+safety is amazing. I can't wait to see what's in Rust's future, and I hope you 
 will consider trying it out if you haven't already.
