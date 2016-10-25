@@ -286,3 +286,37 @@ I hope I've now given you a good feel for what Rust is like as a language. I
 think the community and the development tools they have created is also 
 something worth shouting about, and something that gives me hope that Rust will 
 continue to grow both as a language and in popularity.
+
+The Rust community tries hard to foster inclusion and accessibility. Mentoring 
+is strongly encouraged, and facilitated on Github, where easy-to-fix bugs and 
+issues in Rust's core are tagged to allow new people to come in and learn with 
+the help of someone more experienced.
+
+One of the hardest things for many people learning Rust is its tough learning 
+curve.  The ownership model is new for a lot of people, and manual lifetime 
+annotation (something I didn't get onto in this talk) is still something I'm 
+struggling with (I just do what the compiler tells me!).  Rust has amazing 
+documentation, and incredibly helpful compilation error messages. The community 
+is working hard to make these even better.  The [Rust Roadmap for 
+2017](https://github.com/aturon/rfcs/blob/roadmap-2017/text/0000-roadmap-2017.md) 
+states that making learning easier is one of their main goals.
+
+
+#### Cargo
+
+Cargo, Rust's package management tool, is wonderful.  In one simple file, I 
+list the dependencies of my project.  Then I run `$ cargo build`, and the 
+project is built.  `$ cargo run` will run the project's main.  `$ cargo test` 
+will run the tests.  It's that simple!  No faffing around with Makefiles!
+
+Importantly, Cargo is the one tool used for this.  C and C++ suffer from having 
+a wide range of tools for this one task.  It's so much easier and cleaner to 
+just have one that works brilliantly, and also makes it simpler for newcomers 
+to figure out how to get set up.
+
+
+### Closing thoughts
+
+I'm really excited about Rust.  Writing it is a joy.  The guaranteed memory 
+safety is amazing.  I can't wait to see what's in Rust's future, and I hope you 
+will consider trying it out if you haven't already.
