@@ -194,17 +194,12 @@ race, as none of them are writing to the memory location. Or, we can have
 exactly one write to the memory location, which will never be racing against 
 any other operations.
 
-In languages like C and C++, there are no such restrictions. In Rust, 
-everything is immutable by default. If want to allow a value to be changed, we 
-must explicitly tell the compiler that is what we intend. Attempting to change 
-an immutable value gives a compiler error.  In C and C++, everything is mutable 
-by default, and we can have any number of mutable references to an object.
-
 
 #### Memory safety at zero run-time cost
-<!--TODO haven't made it clear enough how memory safety is achieved-->
-As we have seen, Rust's ownership and borrowing model ensures memory safety and 
-prevents data races. Buffer overflow, dangling pointers, use-after-free are all 
-impossible. Rust's key innovation is enforcing these checks at _compile time_, 
-meaning they do not present any run-time cost. We get memory safety, without 
-the overhead of garbage collection.
+As we have seen, Rust's ownership and borrowing model completely prevents data 
+races.  This, along with compile-time checks for array bounds &c., ensures 
+complete memory safety.  That means freedom from buffer overflow, dangling 
+pointers and use-after-free. Rust's key innovation is enforcing these checks at 
+_compile time_, meaning they do not present any run-time cost. We get memory 
+safety, without overhead.  This completely overturns the old trade-off between 
+safety and speed/control.
