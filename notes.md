@@ -228,9 +228,9 @@ Abstraction without overhead is a design principle shared with C++.  As C++'s
 > What you don’t use, you don’t pay for. And further: What 
 you do use, you couldn’t hand code any better.
 
-In Rust, _traits_ are a large part of how it achieves this.   ["The trait 
-system gives Rust the ergonomic, expressive feel of high-level languages while 
-retaining low-level control over code execution and data 
+_Traits_ are a large part of how Rust achieves this.   ["The trait system gives 
+Rust the ergonomic, expressive feel of high-level languages while retaining 
+low-level control over code execution and data 
 representation."](https://blog.rust-lang.org/2015/05/11/traits.html)
 
 #### So, what is a trait?
