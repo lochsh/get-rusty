@@ -87,9 +87,9 @@ objects. For example, a variable that has gone out of scope is unreachable.
 Garbage collection achieves this management by periodically checking memory to 
 find unused objects, releasing their associated resources and memory.
 
-Garbage collection basically eliminates double frees, dangling pointers, and 
-some memory leaks. Important achievements!  But GC does this at an overhead, at 
-the expense of resources, performance and predictability.
+Garbage collection eliminates double frees, dangling pointers, and most memory 
+leaks. Important achievements!  But GC does this at the expense of resources, 
+performance and predictability.
 
 So, how does Rust achieve memory safety without this overhead?
 
@@ -126,9 +126,9 @@ shallow copy is performed: Rust does a bitwise copy of the vector object `v`
 into the stack allocation represented by `v2`. This shallow copy does _not_ 
 create a copy of the heap allocation containing the vector's actual data.
 
-If both `v` and `v2` both point to the same data, what happens if we change 
-that data, as we do in the third line?  The vector object `v` would have out of 
-date information about its data, and become invalid. We would have introduced
+If `v` and `v2` both point to the same data, what happens if we change that 
+data, as we do in the third line?  The vector object `v` would have out of date 
+information about its data, and become invalid. We would have introduced
 a data race.
 
 To prevent this occurring, Rust enforces its rule of each value having _exactly 
@@ -241,8 +241,8 @@ impl Hash for i64 {
 }
 ```
 Here, we define a trait called `Hash`, and say that any type implementing this 
-trait _must_ have the method `hash`. Later, we implement this trait for the 
-types `bool` and `i64`, by defining this method for this particular type.
+trait must have the method `hash`. Later, we implement this trait for the types 
+`bool` and `i64`, by defining this method for this particular type.
 
 Traits allow for _generic programming_:
 
