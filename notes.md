@@ -84,7 +84,7 @@ Briefly, let's discuss what garbage collection is and why it is slow. Managing
 resources in a program is about freeing up memory being used by unreachable 
 objects. For example, a variable that has gone out of scope is unreachable. 
 
-Garbage collection achieves this management, in a variety of ways, often by 
+Garbage collection can achieve this management in a variety of ways, often by 
 periodically checking memory to find unused objects, releasing their associated 
 resources and memory.
 
