@@ -107,7 +107,7 @@ one_ binding to any given value at a time.
 
 #### Ownership in practice
 Consider this short code snippet from the [Rust 
-docs](https://doc.rust-lang.org/stable/book/ownership.html#the-details)
+docs](https://doc.rust-lang.org/stable/book/ownership.html#the-details):
 
 ```rust
 let v = vec![1, 2, 3];
@@ -293,7 +293,7 @@ list the dependencies of my project. Then I run `$ cargo build`, and the
 project is built. `$ cargo run` will run the project's main. `$ cargo test` 
 will run the tests. It's that simple!  No faffing around with Makefiles! Here's 
 an example:
-```
+```toml
 [package]
 name = "kmeans"
 version = "0.1.0"
