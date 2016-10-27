@@ -84,8 +84,9 @@ Briefly, let's discuss what garbage collection is and why it is slow. Managing
 resources in a program is about freeing up memory being used by unreachable 
 objects. For example, a variable that has gone out of scope is unreachable. 
 
-Garbage collection achieves this management by periodically checking memory to 
-find unused objects, releasing their associated resources and memory.
+Garbage collection achieves this management, in a variety of ways, often by 
+periodically checking memory to find unused objects, releasing their associated 
+resources and memory.
 
 Garbage collection eliminates double frees, dangling pointers, and most memory 
 leaks. Important achievements!  But GC does this at the expense of resources, 
@@ -271,9 +272,9 @@ something worth shouting about, and something that gives me hope that Rust will
 continue to grow both as a language and in popularity.
 
 The Rust community tries hard to foster inclusion and accessibility. Mentoring 
-is strongly encouraged, and facilitated on Github, where easy-to-fix bugs and 
-issues in Rust's core are tagged to allow new people to come in and learn with 
-the help of someone more experienced.
+is strongly encouraged, and facilitated on Github, where easy-to-implement 
+features in Rust's core are tagged to allow new people to come in and learn 
+with the help of someone more experienced.
 
 One of the hardest things for many people learning Rust is its tough learning 
 curve. The ownership model is new for a lot of people, and manual lifetime 
@@ -290,8 +291,19 @@ states that making learning easier is one of their main goals.
 Cargo, Rust's package management tool, is wonderful. In one simple file, I 
 list the dependencies of my project. Then I run `$ cargo build`, and the 
 project is built. `$ cargo run` will run the project's main. `$ cargo test` 
-will run the tests. It's that simple!  No faffing around with Makefiles!
+will run the tests. It's that simple!  No faffing around with Makefiles! Here's 
+an example:
+```
+[package]
+name = "kmeans"
+version = "0.1.0"
+authors = ["Hannah McLaughlin <h@mcla.ug>"]
 
+[dependencies]
+csv = "0.14"
+rustc-serialize = "0.3"
+generic-array = "0.5.1"
+```
 Importantly, Cargo is the one tool used for this. C and C++ suffer from having 
 a wide range of tools for this one task. It's so much easier and cleaner to 
 just have one that works brilliantly, and also makes it simpler for newcomers 
